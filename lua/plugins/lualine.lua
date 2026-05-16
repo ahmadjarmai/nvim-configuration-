@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/plugins/lualine.lua
 return {
   {
     'nvim-lualine/lualine.nvim',
@@ -6,9 +5,10 @@ return {
     config = function()
       require('lualine').setup({
         options = {
-          theme = 'auto',
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
+          icons_enabled = true,
+          theme = 'ayu_mirage',
+          component_separators = { left = '|', right = '|' },
+          section_separators = { left = '|', right = '|' },
         },
         sections = {
           lualine_a = { 'mode' },
