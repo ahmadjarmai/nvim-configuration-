@@ -1,5 +1,4 @@
 return {
-  -- Mason for installing language servers
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
@@ -7,8 +6,6 @@ return {
       require("mason").setup()
     end,
   },
-  
-  -- Bridge between Mason and lspconfig (still needed for some servers)
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
@@ -19,33 +16,23 @@ return {
       })
     end,
   },
-  
-  -- Neovim's built-in LSP configuration (using new vim.lsp.config API)
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
-      -- This is the new vim.lsp.config API introduced in Neovim 0.11
-      vim.lsp.config.lua_ls = {
-        cmd = { "lua-language-server" },
-        filetypes = { "lua" },
-        root_markers = { ".luarc.json", ".luarc.jsonc", ".git" },
-        settings = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-          },
-        },
-      }
-      
-      -- Enable LSP for configured servers
-      vim.lsp.enable("lua_ls")
-      
-      -- Optional: Keymaps for LSP
+
+      vim.lsp.config.clangd = {
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+    },
+}
+      vim.lsp.enable("clangd")
+            -- Keymaps for LSP
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(args)
@@ -61,6 +48,5 @@ return {
         end,
       })
     end,
-    dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
   },
 }

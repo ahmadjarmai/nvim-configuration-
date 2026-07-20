@@ -5,6 +5,8 @@ require("config.options")
 require("config.mappings")
 
 -- Load plugins (using lazy.nvim)
-require("config.lazy")   
+require("config.lazy")
 
-vim.opt.clipboard:append('unnamedplus')   
+--require("config.diagnostics")
+
+vim.opt.clipboard:append('unnamedplus')
