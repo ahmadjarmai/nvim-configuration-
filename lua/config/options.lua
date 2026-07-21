@@ -7,3 +7,5 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.cursorline = true
 vim.g.mapleader = " " 
+--vim.o.mouse = 'a'
+--vim.o.mousemoveevent = true
